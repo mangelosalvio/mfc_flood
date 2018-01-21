@@ -1,0 +1,19 @@
+extends layout
+
+block content	
+	.row
+		
+	div.row
+		div#map.col-sm-9
+		div.col-sm-3.log
+			ul.list-group#log
+				each log, i in logs
+					li.list-group-item
+							= moment(log.current_time).format('LLL')
+							br
+							b= 'Level ' + log.level
+				
+
+
+
+  
