@@ -2,8 +2,16 @@ extends layout
 
 block content	
 	.row
-		
-	div.row
+		.offset-6.col-6
+			form.form-inline.text-right.mb-3(action='/')
+				label From Date
+				input.ml-2(type='date' name='from_date' class='form-control',value=from_date)
+
+				label.ml-3 To Date
+				input.ml-2(type='date' name='to_date' class='form-control',value=to_date)
+
+				input.ml-3.btn.btn-primary(type='submit' value='Search')
+	.row
 		div#map.col-sm-9
 		div.col-sm-3.log
 			ul.list-group#log

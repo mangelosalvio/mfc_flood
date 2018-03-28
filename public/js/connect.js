@@ -18,13 +18,6 @@ function initMap() {
 		zoom: 15
 	});
 
-	var pin = {
-		path: 'M18 8c0-3.31-2.69-6-6-6S6 4.69 6 8c0 4.5 6 11 6 11s6-6.5 6-11zm-8 0c0-1.1.9-2 2-2s2 .9 2 2-.89 2-2 2c-1.1 0-2-.9-2-2zM5 20v2h14v-2H5z',
-		fillColor: 'yellow',
-		fillOpacity: 0.8,
-		scale: 4,
-		strokeColor: 'gold'
-	  };
 
 	var cityCircle = new google.maps.Circle({
 		strokeColor: green,
@@ -41,7 +34,7 @@ function initMap() {
 		map: map,
 		position: center,
 		icon: {
-			url: 'http://image.flaticon.com/icons/svg/252/252025.svg',
+			url: '/images/green.svg',
 			scaledSize: new google.maps.Size(80, 80),
 			origin: new google.maps.Point(0, 0),
 			anchor: new google.maps.Point(32,65),
@@ -52,7 +45,6 @@ function initMap() {
 
 	var socket = io.connect('http://localhost:4000');
 	socket.on('lvl', (data) => {
-		console.log(data.lvl);
 		switch (data.lvl) {
 			case '1':
 				cityCircle.setOptions({
@@ -62,9 +54,11 @@ function initMap() {
 
 				marker.setOptions({
 					icon : {
-						path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-						scale: 10,
-						strokeColor: green
+						url: '/images/green.svg',
+						scaledSize: new google.maps.Size(80, 80),
+						origin: new google.maps.Point(0, 0),
+						anchor: new google.maps.Point(32,65),
+						labelOrigin: new google.maps.Point(40,33)
 					}
 				});
 				break;
@@ -75,9 +69,11 @@ function initMap() {
 				});
 				marker.setOptions({
 					icon : {
-						path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-						scale: 10,
-						strokeColor: blue
+						url: '/images/blue.svg',
+						scaledSize: new google.maps.Size(80, 80),
+						origin: new google.maps.Point(0, 0),
+						anchor: new google.maps.Point(32,65),
+						labelOrigin: new google.maps.Point(40,33)
 					}
 				});
 				break;
@@ -89,9 +85,11 @@ function initMap() {
 				});
 				marker.setOptions({
 					icon : {
-						path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-						scale: 10,
-						strokeColor: yellow
+						url: '/images/yellow.svg',
+						scaledSize: new google.maps.Size(80, 80),
+						origin: new google.maps.Point(0, 0),
+						anchor: new google.maps.Point(32,65),
+						labelOrigin: new google.maps.Point(40,33)
 					}
 				});
 				break;
@@ -102,9 +100,11 @@ function initMap() {
 				});
 				marker.setOptions({
 					icon : {
-						path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-						scale: 10,
-						strokeColor: orange
+						url: '/images/orange.svg',
+						scaledSize: new google.maps.Size(80, 80),
+						origin: new google.maps.Point(0, 0),
+						anchor: new google.maps.Point(32,65),
+						labelOrigin: new google.maps.Point(40,33)
 					}
 				});
 				break;
@@ -115,9 +115,11 @@ function initMap() {
 				});
 				marker.setOptions({
 					icon : {
-						path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-						scale: 10,
-						strokeColor: red
+						url: '/images/red.svg',
+						scaledSize: new google.maps.Size(80, 80),
+						origin: new google.maps.Point(0, 0),
+						anchor: new google.maps.Point(32,65),
+						labelOrigin: new google.maps.Point(40,33)
 					}
 				});
 				break;
@@ -130,9 +132,11 @@ function initMap() {
 
 				marker.setOptions({
 					icon : {
-						path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-						scale: 10,
-						strokeColor: green
+						url: '/images/green.svg',
+						scaledSize: new google.maps.Size(80, 80),
+						origin: new google.maps.Point(0, 0),
+						anchor: new google.maps.Point(32,65),
+						labelOrigin: new google.maps.Point(40,33)
 					}
 				});
 		}

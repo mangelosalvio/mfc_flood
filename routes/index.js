@@ -3,8 +3,10 @@ const { matchedData, sanitize } = require('express-validator/filter');
 
 var express = require('express');
 var router = express.Router();
+var moment = require('moment');
 const Log = require('../models/Log')
 const User = require('../models/User')
+
 
 function requiresLogin(req, res, next) {
   if (req.session && req.session.userId) {
@@ -20,8 +22,24 @@ function requiresLogin(req, res, next) {
 
 /* GET home page. */
 router.get('/', requiresLogin ,function(req, res, next) {
-	const logs = Log.find({}).sort({ current_time : 'desc' }).limit(100).exec().then((logs) => {
-		res.render('index', { title: 'Express', logs : logs });
+
+	
+	var filter = {};
+
+	if (req.query.from_date) {
+
+		var from_date = moment(req.query.from_date);
+		var to_date = moment(req.query.to_date);
+
+		to_date.add(1,'day').subtract(1,'minute');
+
+		filter = {
+			current_time : { '$gte' : from_date.format('YYYY-MM-DD'), '$lte' : to_date.format('YYYY-MM-DD HH:mm:ss') }
+		};
+	}
+	
+	const logs = Log.find(filter).sort({ current_time : -1 }).limit(100).exec().then((logs) => {
+		res.render('index', { title: 'Express', logs : logs, from_date : req.query.from_date, to_date : req.query.to_date });
 	}, (err) => {
 		throw err
 	})
@@ -53,6 +71,8 @@ router.post('/login', [
 				if ( error || !user ) {
 					var err = new Error("Wrong email or password");
 					err.status = 401;
+
+					return res.render('login',{errors : { password : { msg : 'Invalid Username and Password' }  }})
 					return next(err);
 				} else {
 					req.session.userId = user._id;
